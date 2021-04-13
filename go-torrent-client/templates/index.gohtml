@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <title>BitTorrent</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../css/bulma_min.css" >
+        <style>
+            body{
+                margin-top: 100px;
+            }
+        </style>
+    </head>
+
+    <body align="center">
+        <div class="title is-1">Please Upload .torrent file</div>
+
+        <form action="process" method="post" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <input type="submit" class="button is-link">
+        </form>
+
+        {{if .Tf}}
+        <div>
+            <div>
+                <span class="title is-4">Name:</span>{{.Tf.Name}}
+            </div>
+            <div>
+                <span class="title is-4">Announce URL:</span>{{.Tf.Announce}}
+            </div>
+            <div>
+                <span class="title is-4">InfoHash:</span>{{.Tf.InfoHash}}
+            </div>
+            <div>
+                <span class="title is-4">IP's of Peers:</span><br>
+                <ul>
+                    {{range .Peer}}
+                        <li>{{.}}</li>
+                    {{end}}
+                </ul>
+            </div>
+                <div>
+                    <span class="title is-4">No. Of Peers:</span>{{.Length}}
+                </div>
+            </div>
+            <div>
+                <span class="title is-4">PieceLength:</span>{{.Tf.PieceLength}}
+            </div>
+            <div>
+                <span class="title is-4">Length:</span>{{.Tf.Length}}
+            </div>
+            <div>
+                <span class="title is-4">Hash Pieces of parts:</span><br>
+                <ul>
+                {{range .Tf.PieceHashes}}
+                    <li>{{.}}</li>
+                {{end}}
+                </ul>
+            </div>
+
+        {{end}}
+
+    </body>
+</html>
